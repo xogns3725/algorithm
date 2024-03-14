@@ -1,0 +1,23 @@
+T = int(input())
+def pre(n):
+    global count
+    if n:
+        count += 1
+        pre(ch[0][n])
+        pre(ch[1][n])
+
+for test_case in range(1, T+1):
+    E, N = map(int, input().split())
+    lst = list(map(int, input().split()))
+    count = 0
+    ch = [[0] * (E+2) for _ in range(2)]
+
+    for i in range(0,len(lst), 2):
+        parent, child = lst[i], lst[i+1]
+        if ch[0][parent] == 0:
+            ch[0][parent] = child
+        elif ch[1][parent] == 0:
+            ch[1][parent] = child
+
+    pre(N)
+    print(f'#{test_case} {count}')
